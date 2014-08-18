@@ -4,6 +4,7 @@
   :license {:name "The MIT License"
             :url "http://opensource.org/licenses/mit-license.php"
             :distribution :repo}
+  :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [compojure "1.1.6"]
                  [enlive "1.1.5"]
@@ -14,6 +15,7 @@
   :ring {:handler nowplaying.handler/app
          :init nowplaying.handler/init
          :destroy nowplaying.handler/destroy}
+  :uberjar-name "nowplaying-standalone.jar"
   :aot :all
   :profiles
   {:production
