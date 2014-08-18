@@ -7,7 +7,9 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [compojure "1.1.6"]
                  [enlive "1.1.5"]
-                 [ring-server "0.3.1"]]
+                 [ring-server "0.3.1"]
+                 [clj-http "1.0.0"]
+                 [org.clojure/data.json "0.2.5"]]
   :plugins [[lein-ring "0.8.10"]]
   :ring {:handler nowplaying.handler/app
          :init nowplaying.handler/init
