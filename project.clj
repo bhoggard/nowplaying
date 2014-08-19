@@ -10,13 +10,14 @@
                  [enlive "1.1.5"]
                  [ring-server "0.3.1"]
                  [clj-http "1.0.0"]
-                 [org.clojure/data.json "0.2.5"]]
+                 [org.clojure/data.json "0.2.5"]
+                 [ring/ring-jetty-adapter "1.3.0"]]
   :plugins [[lein-ring "0.8.10"]]
   :ring {:handler nowplaying.handler/app
          :init nowplaying.handler/init
          :destroy nowplaying.handler/destroy}
   :uberjar-name "nowplaying-standalone.jar"
-  :aot :all
+  :main ^:skip-aot nowplaying.handler/main
   :profiles
   {:production
    {:ring
