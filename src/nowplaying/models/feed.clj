@@ -12,11 +12,15 @@
   [response]
   (json/read-str (:body response)))
 
+(defn translate-q2
+  [data]
+  (let [entry ((data "current_playlist_item") "catalog_entry")
+       title (entry "title")
+       composer ((entry "composer") "name")]
+    (hash-map :title title :composer composer)))
+
+
 (defn q2
   "get feed for q2 music"
   []
-  (let [data (get-json (http-call q2-url))
-        entry ((data "current_playlist_item") "catalog_entry")
-        title (entry "title")
-        composer ((entry "composer") "name")]
-    (hash-map :title title :composer composer)))
+  (translate-q2 (get-json (http-call q2-url))))
