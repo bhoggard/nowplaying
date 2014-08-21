@@ -4,13 +4,14 @@
 
 (def q2-url "http://www.wqxr.org/api/whats_on/q2/2/")
 (def counterstream-url "http://www.live365.com/pls/front?handler=playlist&cmd=view&viewType=xml&handle=amcenter&maxEntries=1")
+(def yle-url "http://www.live365.com/pls/front?handler=playlist&cmd=view&viewType=xml&handle=amcenter&maxEntries=1")
 
 (defn get-json
   [response]
   (json/read-str response))
 
 (defn translate-q2
-  "translate parsed JSON into title and composer"
+  "translate parsed JSON into title and composer for Q2 Music"
   [data]
   (let [entry ((data "current_playlist_item") "catalog_entry")
         title (entry "title")
@@ -18,12 +19,12 @@
     (hash-map :title title :composer composer)))
 
 (defn q2
-  "get feed for q2 music"
+  "get feed for Q2 Music"
   []
   (translate-q2 (get-json (slurp q2-url))))
 
 (defn translate-counterstream
-  "translate parsed XML into title and composer"
+  "translate parsed XML into title and composer for Counterstream Radio"
   [data]
   (let [entry (-> data :content (get 2))
         title (-> entry :content (get 0) :content first)
@@ -31,6 +32,19 @@
     (hash-map :title title :composer composer)))
 
 (defn counterstream
-  "get feed for counterstream radio"
+  "get feed for Counterstream Radio"
   []
   (-> counterstream-url xml/parse translate-counterstream))
+
+(defn translate-yle
+  "translate parsed XML into title and composer for YLE Klassinen"
+  [data]
+  (let [entry (-> (xml/parse "test/data/yle.xml") :content first :attrs)
+        title (-> entry :TITLE)
+        composer (-> entry :COMPOSER)]
+        (hash-map :title title :composer composer)))
+
+(defn yle
+  "get feed for YLE Klassinen"
+  []
+  (-> yle-url xml/parse translate-yle))
