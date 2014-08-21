@@ -1,6 +1,6 @@
 # nowplaying
 
-one-page clojure application to show what's playing on my favorite classical stations
+One-page clojure application to show what is playing on my favorite classical stations. See it on heroku [here](http://nowplaying.tristanmedia.com/).
 
 ## Prerequisites
 
@@ -17,3 +17,6 @@ To start a web server for the application, run:
 ## License
 
 Copyright © 2014 Barry Hoggard
+
+MIT License
+
