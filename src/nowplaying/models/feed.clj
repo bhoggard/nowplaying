@@ -50,9 +50,9 @@
 (defn translate-yle
   "translate parsed XML into title and composer for YLE Klassinen"
   [data]
-  (let [entry (-> (xml/parse yle-url) :content first :attrs)
-        title (-> entry :TITLE)
-        composer (-> entry :COMPOSER)]
+  (let [entry (-> data :content first)
+        title (-> entry  :content first :content first :content first)
+        composer (-> entry :attrs :COMPOSER)]
         (hash-map :title title :composer composer)))
 
 (defn yle-raw

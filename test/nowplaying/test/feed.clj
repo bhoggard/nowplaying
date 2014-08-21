@@ -16,5 +16,5 @@
 
   (testing "yle parsing"
   (let [data (translate-yle (xml/parse "test/data/yle.xml"))]
-    (is (= (:title data) "Konsertto pianolle ja orkesterille n:o 1 a-molli op.31. 1. Andante - Allegro vivace 2. Scherzo (Allegretto non troppo) 3. Andante quasi adagio 4. Allegro ma non troppo (Vivace)"))
+    (is (= (:title data) "Godard: Pianokonsertto n:o 1 a-molli. (Howard Shelley ja Tasmanian SO)."))
     (is (= (:composer data) "Godard, Benjamin [1849-1895]")))))
