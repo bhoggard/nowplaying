@@ -4,6 +4,7 @@
 
 (def q2-url "http://www.wqxr.org/api/whats_on/q2/2/")
 (def counterstream-url "http://www.live365.com/pls/front?handler=playlist&cmd=view&viewType=xml&handle=amcenter&maxEntries=1")
+(def second-inversion-url "http://filesource.abacast.com/king/TRE/inversion2.xml")
 (def yle-url "http://yle.fi/radiomanint/LiveXML/r17/item(0).xml")
 
 (defn get-json
@@ -61,3 +62,20 @@
   (-> yle-url xml/parse translate-yle))
 
 (defn yle [] (wrap-feed-errors yle-raw))
+
+; composer - (-> si :content first :content (get 3) :content first)
+; title - (-> si :content first :content (get 4) :content)
+(defn translate-second-inversion
+  "translate parsed XML into title and composer for Second Inversion"
+  [data]
+  (let [entry (-> data :content first :content)
+        title (-> entry (get 4) :content first)
+        composer (-> entry (get 3) :content first)]
+        (hash-map :title title :composer composer)))
+
+(defn second-inversion-raw
+  "get feed for Second Inversion"
+  []
+  (-> second-inversion-url xml/parse translate-second-inversion))
+
+(defn second-inversion [] (wrap-feed-errors second-inversion-raw))

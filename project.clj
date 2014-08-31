@@ -11,6 +11,7 @@
                  [ring-server "0.3.1"]
                  [clj-http "1.0.0"]
                  [org.clojure/data.json "0.2.5"]
+                 [org.clojure/data.zip "0.1.1"]
                  [ring/ring-jetty-adapter "1.3.0"]]
   :plugins [[lein-ring "0.8.10"]]
   :ring {:handler nowplaying.handler/app

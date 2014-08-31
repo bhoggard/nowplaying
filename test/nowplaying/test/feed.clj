@@ -14,6 +14,11 @@
     (is (= (:title data) "Serenade"))
     (is (= (:composer data) "Edward T. Cone"))))
 
+  (testing "second inversion parsing"
+  (let [data (translate-second-inversion (xml/parse "test/data/second-inversion.xml"))]
+    (is (= (:title data) "Violin Sonata No.1"))
+    (is (= (:composer data) "Frederic Delius"))))
+
   (testing "yle parsing"
   (let [data (translate-yle (xml/parse "test/data/yle.xml"))]
     (is (= (:title data) "Godard: Pianokonsertto n:o 1 a-molli. (Howard Shelley ja Tasmanian SO)."))
